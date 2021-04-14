@@ -1,0 +1,63 @@
+<h1>WEEKLY SURVEYS</h1>
+<div class = "due-date">
+    <h3>Weekly Survey Due Date: <%= @survey.date-1 %> 11:59PM UTC</h3>
+</div>
+<! -- Using code from my (emma) spellmanager assignment -->
+<! -- also using https://guides.rubyonrails.org/form_helpers.html#making-select-boxes-with-ease -->
+
+<%= form_with url: "/responses", method: :post do |form| %>
+    <% for i in 0..@questions.length-1 %> 
+        <div class="subtitle"> <%= "#{i+1}. #{@questions[i]}" %> </div>
+        <div class="option-container">
+            <%= form.radio_button :"answer#{i+1}", 1, :pattern => '^[1-5]{1}?$'%>
+            <%= form.label :"answer#{i+1}_1", "1", :class => 'label' %>
+            <%= form.radio_button :"answer#{i+1}", 2, :pattern => '^[1-5]{1}?$' %>
+            <%= form.label :"answer#{i+1}_2", "2", :class => 'label' %>
+            <%= form.radio_button :"answer#{i+1}", 3, :pattern => '^[1-5]{1}?$' %>
+            <%= form.label :"answer#{i+1}_3", "3", :class => 'label' %>
+            <%= form.radio_button :"answer#{i+1}", 4, :pattern => '^[1-5]{1}?$' %>
+            <%= form.label :"answer#{i+1}_4", "4", :class => 'label' %>
+            <%= form.radio_button :"answer#{i+1}", 5, :pattern => '^[1-5]{1}?$' %>
+            <%= form.label :"answer#{i+1}_5", "5", :class => 'label' %>
+        </div>             
+    <% end %>
+
+    <%= form.hidden_field :survey_id, value: @survey.id %>
+    <%= form.hidden_field :num_of_questions, value: @questions.count %>
+    <h5><%= form.submit %></h5>
+<% end %>
+<div class="user_team_links">
+    <% if @from == "dashboard" %>
+        <div class="link-container"><%= link_to "Back to Dashboard", user_dashboard_path %></div>
+    <% elsif @from == "team" %>
+        <div class="link-container"><%= link_to "Back to #{@team.name}", user_team_list_path(@team.id) %></div> 
+    <% end %>
+</div>
+
+<br><br>
+<div class="link-container"><a href="#help"><h2>Confused?🤔 Get information here!</h2></a></div>
+
+<div id="help" class="overlay">
+  <div class="popup">
+    <h3 style="text-align:left">Weekly Surveys:</h3>
+    <p style="margin-left:10px; margin-right:5%;">
+        Time to get in touch with your emotions and feelings about the week!
+        <br>
+        <br>
+        For each question, try to think about the ratings in the following context:
+        <br>
+    </p>
+    <p style="margin-left:30px">
+        1: 😭 - Absolutely terrible
+        <br>
+        2: 😟 - It could be better
+        <br>
+        3: 😐 - Meh, could be better could be worse.
+        <br>
+        4: 🙂 - Hey, this is pretty good
+        <br>
+        5: 🥳 - Loved it; 10/10 would do that again
+    </p>
+    <a href="#">Close</a>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<table>
+    <thead>
+      <tr>
+        <th>Created By</th>
+        <th>Member Involved</th>
+        <th>Communication</th>
+        <th>Behaviour</th>
+        <th>Teamwork</th>
+        <th>Availability</th>
+        <th>Rating</th> 
+        <th>Ticket Health</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <% for i in 0..ticket.length-2 %>
+            <td><%= ticket[i] %></td>
+          <% end %>
+          <% if ticket[-1].to_f < 30 %>
+            <td class="red"><b><%= ticket[-1].to_f %>%</b></td>
+          <% elsif ticket[-1].to_f > 90 %>
+            <td class="green"><b><%= ticket[-1].to_f %>%</b></td>
+          <% else %>
+            <td><b><%= ticket[-1].to_f %>%</b></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>    
+<br>

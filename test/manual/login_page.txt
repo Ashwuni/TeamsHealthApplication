@@ -1,0 +1,33 @@
+Test 1 (correct watiam and password)
+    1. enter a existing user's watiam
+    2. enter the user's password
+    3. clicking "login" should log user into correct account
+
+Test 2 (correct watiam, wrong password)
+    1. enter a existing user's watiam
+    2. enter the wrong password
+    3. click "login"
+    4. should display "Cannot log you in. Invalid email or password.""
+
+Test 3 (nonexistent watiam)
+    1. enter a watiam not associated with existing account
+    2. enter a random password
+    3. click "login"
+    4. should display "Cannot log you in. Invalid email or password."
+
+Test 4 (blank inputs)
+    1. leave the watiam and password empty
+    2. click "login"
+    3. should display "Cannot log you in. Invalid email or password."
+
+Test 2 (redirect to create account)
+    1. clicking on "Create Account" should redirect user to the create account page
+
+Fixing Incorrect Login Notice Message #132
+    1. Click the Login button with incorrect watiam or password.
+    2. Verify the notice is 'Cannot log you in. Invalid Watiam or Password'
+   
+remove logout button from login page #135
+    1. make sure logout button is not on login page
+    2. make sure logout button is not on create account page
+    3. make sure logout button is still visible on every other page

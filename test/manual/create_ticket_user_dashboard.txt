@@ -1,0 +1,18 @@
+Test 1 (user can successfully create a ticket)
+    1. login as a user
+    2. click on "create a ticket"
+    3. select a priority, type, category, users, and enter a description
+    4. click "create ticket"
+    5. should redirect to ticket details and display "Ticket was successfully created."
+
+Test 2 (description cannot be blank)
+    1. login as a user
+    2. click on "create a ticket"
+    3. leave description blank
+    4. click "create ticket"
+    5. should display error "Description can't be blank."
+
+Test 3 (user cannot create a ticket for a team they are not on)
+    1. login as a user
+    2. access a path to create a ticket with a team this user is not on (/teams/2/tickets/new)
+    3. should redirect to the user dashboard with a notice saying "You do not have permission to create this ticket"

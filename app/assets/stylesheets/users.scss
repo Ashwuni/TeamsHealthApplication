@@ -1,0 +1,78 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// Source (https://eichefam.net/2011/12/21/popup-windows-without-javascript/) used CSS tutorial from here in order to successfully produce pop-ups without JS
+.overlay {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width: 100%;
+  height: 200%;
+  background: rgba(0,0,0,0.5);
+  transition: opacity 200ms;
+  visibility: hidden;
+  opacity: 0;  
+}
+
+.popup {
+  margin: 75px auto;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #666;
+  width: 60%;
+  height: auto;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  position: relative;
+  overflow-y: auto;
+}
+
+.overlay:target{
+  visibility: visible;
+  opacity: 1;
+}
+
+.close {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 20px;
+  right: 20px;
+  opacity: 0.8;
+  transition: all 200ms;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #666;
+}
+
+.subtitle {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.due-date {
+    height:34px; margin-bottom:-1px;
+}
+    
+div.column-container {
+    margin: auto;
+    text-align: center;
+}
+
+li {
+    text-align: left;
+}
+
+.red_notice{
+    color: red;
+    font-size: 13.19px;
+    font-weight: 400;
+}
+
+.green_notice{
+    color: green;
+    font-size: 13.19px;
+    font-weight: 400;
+}

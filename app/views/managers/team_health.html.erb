@@ -1,0 +1,126 @@
+<h1><%=@team.name%> Health Metrics</h1>
+
+<%= render template: 'teams/health' %>
+
+<h2>Members</h2>
+<% if @team.users.length != 0 %>
+    <%= render template: 'teams/members' %>
+<% else %>
+    <div class="link-container">This team has no members. Let's start tracking this team's health by adding members. Edit Team below!</div>
+<% end %>
+<br>
+
+<div class="link-container">
+   <%= link_to 'Edit Team', edit_team_path(@team) %> 
+</div>
+
+<br><br>
+<h2>Team Health History</h2>
+<% if @team_health_history.length > 0 %>
+    <table>
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Communication</th>
+          <th>Behaviour</th>
+          <th>Teamwork</th>
+          <th>Availability</th>
+          <th>Weekly Surveys</th>
+          <th>Team Health</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for i in 0..@team_health_history.length - 1 do %>
+          <tr>
+            <td><%= link_to @team_health_history[i][0], team_health_details_path(id: @team.id, date: @CURRENT_SURVEY_DUE_DATE - 7*i) %></td>
+            <td><%= @team_health_history[i][1] %>%</td>
+            <td><%= @team_health_history[i][2] %>%</td>
+            <td><%= @team_health_history[i][3] %>%</td>
+            <td><%= @team_health_history[i][4] %>%</td>
+            <td><%= @team_health_history[i][5] %>%</td>
+                <% if @team_health_history[i][6].to_i < 30 %>
+                    <td class="red"><b><%= @team_health_history[i][6] %>%</b></td>
+                <% elsif @team_health_history[i][6].to_i > 90 %>
+                    <td class="green"><b><%= @team_health_history[i][6] %>%</b></td>
+                <% else %>
+                    <td><b><%= @team_health_history[i][6] %>%</b></td>
+                <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="link-container">No historical data available.</div>
+<% end %>
+
+<br><br>
+<div class="link-container">
+    <%= link_to 'Return to Dashboard', manager_dashboard_path %>
+</div>
+
+<br><br>
+<div class="link-container">
+    <a href="#help"><h2>Confused?🤔 Get information here!</h2></a>
+</div>
+
+<div id="help" class="overlay">
+  <div class="popup">
+    <h3 style="text-align:left">Team Health:</h3>
+    <p style="margin-left:10px; margin-right:5%;">
+        This is the place to be if you want to know more about your team's health!
+        <br>
+        <br>
+        <b>Current Week's Team Health</b>
+        <br>
+        At the top of the page you will find a quick visualization that reflects your current week's team health.
+        <br><br>
+        The weekly team health is a direct reflection of how your team feels about the current week as well as how they feel about their teammates!
+        <br>
+        It's simple! The higher the number, the happier your team is!🥳
+        <br><br>
+        <b>How will I know if my team members actually are completing their weekly surveys?</b>
+        <br>
+        We are glad you asked! Below the team health visualization we have a quick table that displays:
+    </p>
+    <p style="margin-left:30px">
+        - Team Member WatIAm
+        <br>
+        - First Name
+        <br>
+        - Last Name
+        <br>
+        - Weekly survey completion status
+    </p>
+    <p style="margin-left:10px; margin-right:5%;">
+        <br>
+        That last column is the most imporant one! Every week you will be able to see whether or not every team member has completed their survey.
+        <br>
+        Here at Paen, we recommend that you do your best to motivate your team members to always complete their surveys, as the more team members complete their surveys, the more accurate our estimation will be!
+    </p>
+    <p style="margin-left:10px; margin-right:5%;">
+        <br>
+        <b>What are the zeros in the team health table?</b>
+        <br>
+        If you see zeroes under communication, behaviour, teamwork, or availability, that means the team members did not submit any tickets for that week.
+        Similarly, zeroes under weekly survey means none of the team members completed their survey that week.
+        The team health is calculated with a combination of tickets and weekly surveys, so it will be nonzero as long as one of the two has been submitted.
+    </p>
+    <h3 style="text-align:left">What if my team roster needs some touch-ups?</h3>
+    <p style="margin-left:10px; margin-right:5%;">
+        Teamwork makes the dream work, right?🧐
+        <br>
+        If your team list needs to be updated, use the "Edit Team" link under the Members table.
+    </p>
+    <h3 style="text-align:left">What is Team Health History?</h3>
+    <p style="margin-left:10px; margin-right:5%;">
+        You know how we have that super cool team health visualization for this week's health at the top of the page?
+        <br>
+        What if we told you, that you could see the history of your team's health??😮 Don't believe me?
+        <br><br>
+        Great news: you can click on any of the past weeks to view details on the team health of that week!
+        <br><br>
+    </p>
+    <a href="#">Close</a>
+  </div>
+</div>
+

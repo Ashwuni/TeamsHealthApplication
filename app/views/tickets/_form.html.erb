@@ -1,0 +1,57 @@
+<%= form_with url: create_team_ticket_path(@team), method: :post do |form| %>
+  <% if ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+      <ul>
+        <% ticket.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div>
+      <p  class="subtitle">
+        <nobr>
+          1. Please Select the Member Who is Involved:
+          <%= form.collection_select(:users, @team.users.where.not(id: @users_to_not_select), :id, :full_name_with_watiam, {:prompt => 'Please Select A Member'}, {required: true}) %>
+        </nobr>
+      </p>
+      
+      <p class="note">If they are not listed, then please make note of your concerns for next week's ticket session. You may only send a ticket to a team member once a week.</p>
+    
+    <div class="field">
+      <!--  Source (https://www.rubyguides.com/2015/12/ruby-time/) Used for understanding how the Ruby time library works -->
+      <%= form.hidden_field :date, value: Date.today %>
+      <%= form.hidden_field :creator_id, value: current_user.id %>
+    </div>
+  </div>
+
+<!-- using https://guides.rubyonrails.org/form_helpers.html#making-select-boxes-with-ease -->
+<p class="subtitle">2. How well does this person communicate with the team through all mediums?</p>
+<div class="field">
+    <p>I've experienced <%= form.select :answer1, [["great", 3], ["typical", 2], ["poor", 1]], selected: params[:answer1] %> commmunication with this person</p>
+</div>
+
+<p class="subtitle">3. Consider the manner through which this person conducts themselves within the team.</p>
+<div class="field">
+    <p>I've experienced <%= form.select :answer2, [["great", 3], ["typical", 2], ["poor", 1]], selected: params[:answer2] %> behaviour with this person</p>
+</div>
+
+<p class="subtitle">4. Consider this person's ability to work with and contribute to the team</p>
+<div class="field">
+    <p>I've experienced <%= form.select :answer3, [["great", 3], ["typical", 2], ["poor", 1]], selected: params[:answer3] %> teamwork with this person</p>
+</div>
+
+<p class="subtitle">5. How accessible and open to communication is this person?</p>
+<div class="field">
+    <p>I've experienced <%= form.select :answer4, [["great", 3], ["typical", 2], ["poor", 1]], selected: params[:answer4] %> availability with this person</p>
+</div>
+
+<div class="field">
+    <p class="subtitle">6. I would rate this team member a(n) <%= form.select :answer5, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], selected: params[:answer5] %> out of 10.</p>
+</div> 
+
+<h5><%= form.submit %></h5>
+<% end %>
