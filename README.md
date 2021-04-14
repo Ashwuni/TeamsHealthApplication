@@ -42,3 +42,4 @@ Watiam - "manager1"
 Password - "password"
 
 
+Project made University of Waterloo MSCI 342 Final Project. This app was developed by me and 5 of my classmates: Emma Lin, Francois Barnard, Laurie Gao, Sabrina Lu and Thomas Mastantuono. 
